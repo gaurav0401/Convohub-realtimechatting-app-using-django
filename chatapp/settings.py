@@ -88,10 +88,21 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
+'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'neondb',
+    'USER': 'neondb_owner',
+    'PASSWORD': 'LlM7hPuFdfW4',
+    'HOST': 'ep-shrill-wildflower-a1nzvf3u.ap-southeast-1.aws.neon.tech',
+    'PORT': '5432',
     }
+
+
 }
 
 
