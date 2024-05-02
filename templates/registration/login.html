@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+
+  <div class="container">
+    <h5 class="alert alert-info">Log In</h5>
+    <div class="btn btn-light d-flex justify-content-between" style="padding: 34px 30%;">
+        
+     
+          <form action="/loginuser" method="post">
+            {% csrf_token %}
+            <label for="username">username</label>
+            <input type="text" name="username" id="" required>
+            <br>
+            <label for="password">Password</label>
+           
+            <input type="password" name="password" id="" required>
+            <button type="submit" class="btn btn-light" >Log In</button>
+        </form>
+   
+      </div>
+</div>  
+
+
+{% endblock %}

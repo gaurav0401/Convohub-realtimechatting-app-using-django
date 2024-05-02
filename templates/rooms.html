@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block homeactive %} active{% endblock homeactive %}
+
+{% block content %}
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="color: white">
+    <div class="modal-content" style="background-color: rgba(7, 59, 107, 0.15);  
+    backdrop-filter: blur(5px);">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: white">Create a new Chat Room </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/createroom" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="roomname" class="form-label">Room Name</label>
+            <input type="text" placeholder="Enter name of your Chat Room " class="form-control" name="roomname"
+              id="loginuserid" aria-describedby="emailHelp">
+
+          </div>
+          <div class="mb-3">
+            <label for="tagname" class="form-label">Tag</label>
+            <input type="text" placeholder="Provide a tag to your Chat Room" class="form-control" name="tagname"
+              id="loginPassword">
+          </div>
+          <div class="modal-footer">
+
+            <button type="submit" class="btn btn-primary"
+              style=" background-color:rgb(5, 30, 83); border-color: rgb(5, 30, 83);"> Create</button>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <div class="container">
+    <div class="alert alert-info d-flex justify-content-between" role="alert">
+        <h5>Available  Chat Rooms</h5>
+        <!-- <a href="/logout">
+          <button type="button" class="btn btn-light">Click to Log Out</button>
+        </a> -->
+        <button type="button" style="color: white; background-color: rgb(6, 80, 141); border-color: rgb(6, 80, 141);"
+            class="btn btn-success mx-2 my-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" >
+            <i class="fa-solid fa-plus"></i> Create a new Room
+          </button>
+     
+      </div>
+      
+      
+      {% if rooms %}
+        <div class="row equal">
+            {% for room in rooms %}
+            
+            <div class="col-sm-4 d-flex pb-3">
+                <div class="card  mb-3" style="max-width: 18rem;  background-color: rgba(119, 192, 252, 0.356);  
+                backdrop-filter: blur(5px);">
+                    <div class="card-block">
+                        <h3 class="card-title">{{room.name}}</h3>
+                        <p class="card-text mb-0" > <b> Admin :</b>{{room.user.username}}</p>
+                        <!-- <p class="card-text"> <b> <span style="color: rgb(10, 168, 10); font-size: 20px;"><b>●</b></span> Active Now :</b>{{active_usr}}</p> -->
+                        <a href="/{{room.slug}}" class="btn btn-outline-secondary" style="color: white; background-color: rgb(6, 80, 141); border-color: rgb(6, 80, 141);">Go to Room</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            
+        </div>
+    {% else %}
+            No Rooms Available!
+    {% endif %}
+</div>
+
+
+
+
+<!-- <div class="container">
+    <div class="alert alert-info d-flex justify-content-between" role="alert">
+        <h5>You are not logged in</h5>
+        <a href="/logout">
+          <button type="button" class="btn btn-light"><a href="loginform">Log In</a></button>
+        </a>
+      </div>
+</div>   -->
+
+
+<br/>
+
+    
+
+
+
+
+{% endblock %}

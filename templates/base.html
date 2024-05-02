@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock %} | ConvoHub</title>
+  </head>
+  <style>
+    .chat-message {
+      width: 100%;
+      border: 2px solid palegreen;
+      border-radius: 6px;
+      margin: 2px 0px;
+    }
+    .card{
+      max-width: initial;
+
+    }
+    .card-block{
+      padding: 28px 20px;
+    }
+    .jumbotron{
+      background-color: white;
+    }
+
+    body {
+
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+    }
+  
+  </style>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light"
+    style="background: linear-gradient(-45deg, rgb(28, 73, 124), rgb(28, 73, 124), rgb(28, 73, 124), rgb(28, 73, 124)); color: white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">ConvoHub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="/">Home</a>
+          </li>
+       
+      
+          <li class="nav-item">
+            <a class="nav-link " href="/admin" target="_blank">Admin</a>
+          </li>
+
+
+        </ul>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog" style="color: white;  ">
+            <div class="modal-content" style="background-color: rgba(7, 59, 107, 0.15);  
+            backdrop-filter: blur(5px);">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" style="color: white">Register Here</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+              </div>
+              <div class="modal-body">
+
+                <form  action="/signup" method="post"> 
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input required type="text" class="form-control" id="username" name="username"
+                      aria-describedby="emailHelp" placeholder="Choose unique @username (must be alphanumeric)">
+
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input required type="text" class="form-control" id="fname" name="fname"
+                      aria-describedby="emailHelp" placeholder="Enter first name">
+
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lname" name="lname" aria-describedby="emailHelp"
+                      placeholder="Enter last name">
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                      placeholder="Enter your email ID">
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="pass1" class="form-label">Password</label>
+                    <input required type="password" class="form-control" id="pass1" name="pass1"
+                      placeholder="Create your password">
+                    <div id="emailHelp" class="form-text" style="color: whitesmoke;">We'll never share your password with anyone else.</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="pass2" class="form-label">Re-enter Password</label>
+                    <input required type="password" class="form-control" id="pass2" name="pass2"
+                      placeholder="Confirm your password">
+                  </div>
+
+
+                  <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary"
+                      style="background-color: rgb(5, 30, 83); border-color: rgb(5, 30, 83);">Register</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" style="color: white">
+            <div class="modal-content" style="background-color: rgba(7, 59, 107, 0.15);  
+            backdrop-filter: blur(5px);">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: white">Login Here</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+              </div>
+              <div class="modal-body">
+
+                <form action="/loginuser" method="post">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="loginusername" class="form-label">Username</label>
+                    <input type="text" placeholder="Enter username" class="form-control" name="loginusername"
+                      id="loginuserid" aria-describedby="emailHelp">
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" placeholder="Enter your password" class="form-control" name="loginPassword"
+                      id="loginPassword">
+                  </div>
+                  <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary"
+                      style=" background-color:rgb(5, 30, 83); border-color: rgb(5, 30, 83);"> Log In</button>
+                  </div>
+                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      
+        {% if user.is_authenticated %}
+
+        <div class="d-flex mx-4 ">
+
+          <big class="my-2" style="font-weight: 400; padding-right: 10px;">{{request.user}}</big>
+          <img src="/static/pro.png" class="rounded-circle my-2" alt="" height="32px">
+          <button type="button" class="btn  mx-4 my-2" style="background-color: rgb(4, 113, 209); border-color: rgb(4, 113, 209);">
+            <a href="/logout" style="text-decoration: none; color: white; ">Logout</a>
+          </button>
+        </div>
+
+
+        {% else %}
+        <!-- Button trigger modal -->
+
+        <div class="d-flex mx-4 ">
+          <button type="button" class="btn btn-success my-2 " style="background-color: rgb(4, 113, 209); border-color: rgb(4, 113, 209);"
+            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Sign Up
+          </button>
+
+          <button type="button" style="background-color: rgb(4, 113, 209); border-color: rgb(4, 113, 209);"
+            class="btn btn-success mx-2 my-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Login
+          </button>
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+   {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0  py-0 " role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+
+
+    {% block header%}
+    <div class="container mt-5">
+      <div class="h-100 p-5 text-white bg-dark rounded-3">
+        <h2> Hi <b>{{ user.username }}</b>, Welcome to ConvoHub</h2>
+      </div>
+    </div>
+    
+ 
+      <br/>
+      
+    {% endblock %}
+
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+
+
+
+
+    <footer class="text-center" id="contact "
+    style="margin-top: 45vh; background: linear-gradient(-45deg, rgb(28, 73, 124), rgb(28, 73, 124), rgb(28, 73, 124), rgb(28, 73, 124));  color: white;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+
+        <!--Call -->
+        <a class="btn btn-outline-light btn-floating m-1" href="tel:7017501776" role="button"><i
+            class="fa fa-phone"></i></a>
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/gaurav-bhatt-b927321a6/"
+          role="button"><i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/gaurav_04_01/"
+          role="button"><i class="fab fa-instagram"></i></a>
+
+
+
+        <!-- Email -->
+        <a class="btn btn-outline-light btn-floating m-1" href="mailto:gauravbhatt0401@gmail.com" role="button"><i
+            class="fa fa-envelope"></i></a>
+
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center pb-3" >
+     <span style="font-size: 2vh;"> ©  <small id="year"></small> ConvoHub | All rights reserved </span><br>
+      <a style="font-size: 2vh;" class="text-light" href="https://gaurav-bhatt-s-portfolio.vercel.app/">Design & Developed by Gaurav Bhatt</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+      const yearSpan = document.querySelector('#year')
+      const curYear = new Date()
+      yearSpan.innerHTML = curYear.getFullYear()
+    </script>
+  </body>
+</html>
